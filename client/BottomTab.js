@@ -1,13 +1,15 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeComponent from './tugas/Home';
 import IsiBerita from './tugas/IsiBerita';
 import ListArtikel from './tugas/ListArtikel';
 import CategoryComponent from './tugas/Category';
-import LoginComponent from './tugas/Login';
-import RegisterComponent from './tugas/Register';
+import LoginComponent from './tugas/LoginBaru';
+import RegisterComponent from './tugas/RegisterBaru';
 import AboutComponent from './tugas/AboutUs';
+import LoadingComponent from './tugas/LoadingBaru';
+import ProfileComponent from './tugas/ProfileBaru';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const isLogin = false;
@@ -19,11 +21,14 @@ const HomeStack = createStackNavigator({
     IsiBerita: {
         screen : IsiBerita
     },
-    Login : {
-        screen : LoginComponent
-    },
     About : {
         screen : AboutComponent
+    }
+})
+
+const ProfileStack = createStackNavigator({
+    ProfileRoot : {
+        screen : ProfileComponent
     }
 })
 
@@ -39,6 +44,12 @@ const CategoryStack = createStackNavigator({
     },
 })
 
+const AboutStack = createStackNavigator({
+    AboutRoot : {
+        screen : AboutComponent
+    }
+})
+
 const LoginStack = createStackNavigator({
     LoginRoot : {
         screen : LoginComponent
@@ -48,11 +59,25 @@ const LoginStack = createStackNavigator({
     },
 })
 
-const AboutStack = createStackNavigator({
-    AboutRoot : {
-        screen : AboutComponent
+const SwitchAcc = createSwitchNavigator({
+    LoadingScreen : {
+        screen: LoadingComponent
+    },
+    LoginComponent : {
+        screen: LoginStack
+    },
+    ProfileComponent : {
+        screen : ProfileStack
     }
+}, {
+    initialRouteName : 'LoadingScreen'
 })
+
+SwitchAcc.navigationOptions = ({navigation})=> {
+    let tabBarVisible = false;
+    if (navigation.state.index > 1) {tabBarVisible = true}
+    return {tabBarVisible};
+}
 
 const BottomTab = createBottomTabNavigator({
     HomeTab : {
@@ -69,21 +94,21 @@ const BottomTab = createBottomTabNavigator({
             tabBarIcon: <Ionicons name='md-menu' color={'#000'} size={20} />
         }
     },
-    LoginTab: {
-        screen: LoginStack,
-        navigationOptions: {
-            tabBarLabel: 'Login',
-            tabBarIcon: <Ionicons name='md-people' color={'#000'} size={20} />
-        }
-    },
+    
     AboutTab : {
         screen: AboutStack,
         navigationOptions: {
             tabBarLabel: 'AboutUs',
             tabBarIcon: <AntDesign name='exclamation' color={'#000'} size={20} />
         }
+    },
+    ProfileTab : {
+        screen: SwitchAcc,
+        navigationOptions : {
+            tabBarLabel: 'Profile',
+            tabBarIcon: <Ionicons name="ios-body" color={'#000'} size={20} />
+        }
     }
-
 })
 
 export default createAppContainer(BottomTab);

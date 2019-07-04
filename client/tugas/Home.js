@@ -78,19 +78,19 @@ export default class Home extends Component {
 
     render() {
         return(
-            <ScrollView> 
+            <ScrollView style={{backgroundColor: '#BBBBBB',}}> 
                 {this.state.data.map((item, index) => (
                     <TouchableOpacity
                         key={index}
+                        style={{padding: 5}}
                         onPress={()=> this.props.navigation.push('IsiBerita', this.state.data[index])}
                     >
-                        <View style={{flexDirection: 'row', borderBottomWidth: 1, alignItems: 'center'}}>
+                        <View style={{backgroundColor: 'white', flexDirection: 'row', alignItems: 'center'}}>
                             <Image source={{uri: `${Address.backEndAddress}/image/${item.heroImage}`}} style={{width: 80, height : 95, borderRadius : 10, margin: 10}} />
                             <Text style={{flex: 1, flexWrap: 'wrap', fontFamily: 'Times New Roman', fontWeight : 'bold', color: 'black'}}>{item.judulArtikel}</Text>
                         </View>
                     </TouchableOpacity>
                 ))}
-
             </ScrollView>
         )
     }
