@@ -30,10 +30,10 @@ export default class ProfileBaru extends Component {
 
     render() {
         return(
-            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                <Text>Hi,{this.state.username}</Text>
+            <View style={{margin: 'auto'}}>
+                <Text>Hi!</Text>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('LoginComponent')}>
                     <Text>Log Out</Text>
                 </TouchableOpacity>
             </View>

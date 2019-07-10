@@ -7,9 +7,9 @@ export default class LoadingBaru extends Component {
         AsyncStorage.getItem('token')
         .then(response => {
             if(response === null) {
-                this.props.navigation.navigate('LoginStack')
+                this.props.navigation.navigate('LoginRoot')
             } else {
-                this.props.navigation.navigate('ProfileStack')
+                this.props.navigation.navigate('ProfileRoot')
             }
         })
     }

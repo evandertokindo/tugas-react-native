@@ -1,9 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
-const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-const secretKey = 'tugasKelompok';
 
 const conn = mysql.createConnection({
     host : 'localhost',
@@ -12,18 +9,6 @@ const conn = mysql.createConnection({
     database : 'dbtugas6',
 })
 
-app.use((req, res, next)=> {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    if(req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-        return res.status(200).json({});
-    }
-    next();
-})
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 app.use('/image', express.static('./images'))
 
 app.get('/hello', (req, res)=> {
@@ -114,10 +99,7 @@ app.get('/panggil/:kategori', (req, res)=> {
     })
 })
 
-conn.connect((err)=> {
-    if(err) {console.log(`Problem while connecting to database: ${err}`)}
-    else {console.log(`Connected to database`)}
-});
+conn.connect();
 
 app.listen(8000, ()=> {
     console.log(`Listening on 8000`)

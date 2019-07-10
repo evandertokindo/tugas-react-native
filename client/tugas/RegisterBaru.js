@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, TextInput, TouchableOpacity, AsyncStorage, Text } from 'react-native';
 import Address from '../Address';
 
 export default class LoginBaru extends Component {
@@ -45,7 +45,7 @@ export default class LoginBaru extends Component {
         return(
             <View>
                 <TextInput
-                    onChangeText={value => {this.state({username: value})}}
+                    onChangeText={value => {this.setState({username: value})}}
                     autoCapitalize='none'
                     returnKeyType='next'
                     placeholder='username'
@@ -54,7 +54,7 @@ export default class LoginBaru extends Component {
                 />
 
                 <TextInput
-                    onChangeText={value => {this.state({password: value})}}
+                    onChangeText={value => {this.setState({password: value})}}
                     autoCapitalize='none'
                     returnKeyType='go'
                     placeholder='password'

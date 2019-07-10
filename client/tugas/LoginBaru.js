@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, TextInput, TouchableOpacity, AsyncStorage, Text } from 'react-native';
 import Address from '../Address';
 
 export default class LoginBaru extends Component {
@@ -13,39 +13,62 @@ export default class LoginBaru extends Component {
         }
     }
 
-    signUp() {
-        const {password, check} = this.state;
-        if (password !== check) {
-            alert("Password Salah");
-        } else {
-            fetch(`${Address.backEndAddress}/register`, {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username : this.state.username,
-                    password : this.state.password
-                })
+    login() {
+        fetch(`${Address.backEndAddress}/login`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username : this.state.username,
+                password : this.state.password
             })
-            .then(res => {
-                AsyncStorage.setItem('token', res.token);
-                AsyncStorage.setItem('id', res.id)
-                this.props.navigation.navigate('HomeStack')
-            })
-            .catch(err => {
-                alert('Fetching Error.');
-                console.log(err)
-            })
-        }
+        })
+        .then(res => {
+            AsyncStorage.setItem('token', res.token);
+            AsyncStorage.setItem('id', res.id)
+            this.props.navigation.navigate('ProfileComponent')
+        })
+        .catch(err => {
+            alert('Fetching Error.');
+            console.log(err)
+        })
     }
+
+    // signUp() {
+    //     const {password, check} = this.state;
+    //     if (password !== check) {
+    //         alert("Password Salah");
+    //     } else {
+    //         fetch(`${Address.backEndAddress}/register`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 Accept: 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 username : this.state.username,
+    //                 password : this.state.password
+    //             })
+    //         })
+    //         .then(res => {
+    //             AsyncStorage.setItem('token', res.token);
+    //             AsyncStorage.setItem('id', res.id)
+    //             this.props.navigation.navigate('HomeStack')
+    //         })
+    //         .catch(err => {
+    //             alert('Fetching Error.');
+    //             console.log(err)
+    //         })
+    //     }
+    // }
 
     render() {
         return(
             <View>
                 <TextInput
-                    onChangeText={value => {this.state({username: value})}}
+                    onChangeText={value => {this.setState({username: value})}}
                     autoCapitalize='none'
                     returnKeyType='next'
                     placeholder='username'
@@ -54,7 +77,8 @@ export default class LoginBaru extends Component {
                 />
 
                 <TextInput
-                    onChangeText={value => {this.state({password: value})}}
+                    onChangeText={value => {this.setState({password: value})}}
+                    style={{}}
                     autoCapitalize='none'
                     returnKeyType='go'
                     placeholder='password'
@@ -64,9 +88,9 @@ export default class LoginBaru extends Component {
                 />
 
                 <View
-                style={{justifyContent: 'space-between', alignItems: 'center', flex: 1,flexDirection: 'row'}}>
+                >
                     <TouchableOpacity
-                        onPress={()=> this.signUp()}
+                        onPress={()=> this.login()}
                     >
                         <Text>Masuk</Text>
                     </TouchableOpacity>
