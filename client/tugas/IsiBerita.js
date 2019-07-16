@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         margin: 15,
         width: '90%',
-        color: 'black'
+        color: 'white'
 
     }
 })
@@ -41,13 +41,13 @@ export default class News1 extends Component {
         return(
             <ScrollView>
                 
-                <View  >
+                <View style={{backgroundColor: 'black'}} >
                     <Image
                         source={{uri: `${Address.backEndAddress}/image/${this.props.navigation.state.params.heroImage}`}}
                         style={{width: '100%', height: 200}}
                     />
 
-                    <Text style={{color: 'black', fontSize: 20, textAlign: 'left', margin: 10}}>{this.props.navigation.state.params.judulArtikel}</Text>
+                    <Text style={{color: 'white', fontSize: 20, textAlign: 'left', margin: 10}}>{this.props.navigation.state.params.judulArtikel}</Text>
 
                     <Text style={styles.tulisanArtikel} >
                         {this.props.navigation.state.params.teksArtikel}
