@@ -1,6 +1,43 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, AsyncStorage, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, AsyncStorage, Text, StyleSheet } from 'react-native';
 import Address from '../Address';
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        width: '100%',
+    },
+
+    inputan : {
+        width: '95%',
+        padding : 10,
+        borderRadius: 10,
+        backgroundColor: 'lightgray',
+        marginBottom: 10
+    },
+
+    tombollogin: {
+        width: '95%',
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 50,
+        marginBottom: 10,
+    },
+
+    tomboldaftar: {
+        width: '95%',
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 50,
+    },
+
+    tulisan: {
+        fontSize: 30,
+        textAlign: 'center',
+        color: 'black',
+        marginBottom: 20,
+    }
+})
 
 export default class LoginBaru extends Component {
 
@@ -44,30 +81,38 @@ export default class LoginBaru extends Component {
     render() {
         return(
             <View>
-                <TextInput
-                    onChangeText={value => {this.setState({username: value})}}
-                    autoCapitalize='none'
-                    returnKeyType='next'
-                    placeholder='username'
-                    value={this.state.username}
-                    onSubmitEditing={()=> {this.inputPassword.focus()}}
-                />
+                <View style={styles.container}>
 
-                <TextInput
-                    onChangeText={value => {this.setState({password: value})}}
-                    autoCapitalize='none'
-                    returnKeyType='go'
-                    placeholder='password'
-                    secureTextEntry
-                    value={this.state.password}
-                    ref={ref => this.inputPassword = ref}
-                />
+                    <Text style={styles.tulisan} >Register Form</Text>
 
-                <TouchableOpacity
-                    onPress={()=> this.signUp()}
-                >
-                    <Text>Daftar</Text>
-                </TouchableOpacity>
+                    <TextInput
+                        style={styles.inputan}
+                        onChangeText={value => {this.setState({username: value})}}
+                        autoCapitalize='none'
+                        returnKeyType='next'
+                        placeholder='username'
+                        value={this.state.username}
+                        onSubmitEditing={()=> {this.inputPassword.focus()}}
+                    />
+
+                    <TextInput
+                        style={styles.inputan}
+                        onChangeText={value => {this.setState({password: value})}}
+                        autoCapitalize='none'
+                        returnKeyType='go'
+                        placeholder='password'
+                        secureTextEntry
+                        value={this.state.password}
+                        ref={ref => this.inputPassword = ref}
+                    />
+
+                    <TouchableOpacity
+                        style={styles.tomboldaftar}
+                        onPress={()=> this.signUp()}
+                    >
+                        <Text style={{textAlign: 'center', color: 'white'}} >Daftar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }

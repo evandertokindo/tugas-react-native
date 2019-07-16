@@ -30,12 +30,14 @@ export default class ProfileBaru extends Component {
 
     render() {
         return(
-            <View style={{margin: 'auto'}}>
-                <Text>Hi!</Text>
+            <View>
+                <View style={{alignItems: 'center', width: '90%'}} >
+                    <Text style={{textAlign: 'center' }}>Hi!</Text>
 
-                <TouchableOpacity onPress={()=> this.props.navigation.navigate('LoginComponent')}>
-                    <Text>Log Out</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={{backgroundColor: 'red', width: '30%', marginTop: 10 }} onPress={()=> this.logoutHandler()}>
+                        <Text style={{color: 'white', textAlign: 'center' }}>Log Out</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
